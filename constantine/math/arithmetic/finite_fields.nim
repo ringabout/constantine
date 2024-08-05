@@ -567,6 +567,19 @@ func pow_vartime*(a: var FF, exponent: openarray[byte]) =
     FF.getSpareBits()
   )
 
+func pow_vartime*(a: var FF, exponent: FF) =
+  ## Exponentiation modulo p
+  ## ``a``: a field element to be exponentiated
+  ## ``exponent``: a field element
+  ##
+  ## Warning ⚠️ :
+  ## This is an optimization for public exponent
+  ## Otherwise bits of the exponent can be retrieved with:
+  ## - memory access analysis
+  ## - power analysis
+  ## - timing analysis
+  a.pow_vartime(toBig exponent)
+
 func pow_squareMultiply_vartime(a: var FF, exponent: SomeUnsignedInt) {.tags:[VarTime], meter.} =
   ## **Variable-time** Exponentiation
   ##
