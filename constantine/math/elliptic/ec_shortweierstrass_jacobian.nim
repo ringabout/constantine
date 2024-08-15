@@ -332,6 +332,8 @@ template sumImpl[F; G: static Subgroup](
 
   # if P or R were infinity points they would have spread 0 with Z₁Z₂
   block: # Infinity points
+    bind isNeutral
+    bind ccopy
     o.ccopy(Q, P.isNeutral())
     o.ccopy(P, Q.isNeutral())
 
@@ -1028,7 +1030,7 @@ func `~-`*(a: EC_ShortW_Jac, b: EC_ShortW_Aff): EC_ShortW_Jac {.noInit, inline.}
   ## This MUST NOT be used with secret data.
   ##
   ## This is highly VULNERABLE to timing attacks and power analysis attacks.]
-  ## 
+  ##
   ## Out-of-place functions SHOULD NOT be used in performance-critical subroutines as compilers
   ## tend to generate useless memory moves or have difficulties to minimize stack allocation
   ## and our types might be large (Fp12 ...)
